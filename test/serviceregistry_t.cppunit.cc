@@ -15,7 +15,7 @@
 
 #include <cppunit/extensions/HelperMacros.h>
 
-#include "FWCore/Framework/interface/ProblemTracker.h"
+#include "FWCore/Utilities/interface/ProblemTracker.h"
 
 #include "boost/thread/thread.hpp"
 
