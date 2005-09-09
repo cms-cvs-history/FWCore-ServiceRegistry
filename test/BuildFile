@@ -11,7 +11,7 @@
 
 <bin name=testServiceRegistry file=testRunner.cc,servicesmanager_t.cppunit.cc,serviceregistry_t.cppunit.cc>
   <lib name=FWCoreServiceRegistryTestDummyService>
-  <use name=FWCore/Framework>    
+  <use name=FWCore/Utilities>    
 </bin>
 
 
