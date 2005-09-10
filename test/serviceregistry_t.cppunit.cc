@@ -57,9 +57,9 @@ testServiceRegistry::loadTest()
 
    edm::ServiceToken token(edm::ServiceRegistry::createSet(pss));
 
-   edm::ServiceRegistry::Operate operate( token );
+   edm::ServiceRegistry::Operate operate(token);
    edm::Service<testserviceregistry::DummyService> dummy;
-   CPPUNIT_ASSERT( dummy->value() == 2 );
+   CPPUNIT_ASSERT(dummy->value() == 2);
 }
 
 void
@@ -109,10 +109,10 @@ testServiceRegistry::hierarchyTest()
 namespace {
    struct UniqueRegistry {
 
-      UniqueRegistry( void* iReg) : otherRegistry_(iReg) {}
+      UniqueRegistry(void* iReg) : otherRegistry_(iReg) {}
       
       void operator()(){
-         isUnique_ = (otherRegistry_ != &(edm::ServiceRegistry::instance()) );
+         isUnique_ = (otherRegistry_ != &(edm::ServiceRegistry::instance()));
       }
       void* otherRegistry_;
       static bool isUnique_;
@@ -120,10 +120,10 @@ namespace {
    bool UniqueRegistry::isUnique_ = false;
 
    struct PassServices {
-      PassServices( edm::ServiceToken iToken,
+      PassServices(edm::ServiceToken iToken,
                     bool& oSucceeded,
-                    bool& oCaughtException
-                    ) : token_(iToken), success_(&oSucceeded), caught_(&oCaughtException)
+                    bool& oCaughtException) :
+                    token_(iToken), success_(&oSucceeded), caught_(&oCaughtException)
    { *success_ = false; *caught_ = false; }
 
       void operator()() {
