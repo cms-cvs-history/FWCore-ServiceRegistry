@@ -59,6 +59,8 @@ testServiceRegistry::loadTest()
 
    edm::ServiceRegistry::Operate operate(token);
    edm::Service<testserviceregistry::DummyService> dummy;
+   CPPUNIT_ASSERT(dummy);
+   CPPUNIT_ASSERT(dummy.isAvailable());
    CPPUNIT_ASSERT(dummy->value() == 2);
 }
 
