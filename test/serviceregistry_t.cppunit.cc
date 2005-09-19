@@ -50,7 +50,7 @@ testServiceRegistry::loadTest()
    
    edm::ParameterSet ps;
    std::string typeName("DummyService");
-   ps.addParameter("service_type", typeName);
+   ps.addParameter("@service_type", typeName);
    int value = 2;
    ps.addParameter("value", value);
    pss.push_back(ps);
@@ -73,7 +73,7 @@ testServiceRegistry::hierarchyTest()
    {
       edm::ParameterSet ps;
       std::string typeName("DummyService");
-      ps.addParameter("service_type", typeName);
+      ps.addParameter("@service_type", typeName);
       int value = 1;
       ps.addParameter("value", value);
       pss.push_back(ps);
@@ -84,7 +84,7 @@ testServiceRegistry::hierarchyTest()
    {
       edm::ParameterSet ps;
       std::string typeName("DummyService");
-      ps.addParameter("service_type", typeName);
+      ps.addParameter("@service_type", typeName);
       int value = 2;
       ps.addParameter("value", value);
       pss.push_back(ps);
@@ -164,7 +164,7 @@ testServiceRegistry::threadTest()
    {
       edm::ParameterSet ps;
       std::string typeName("DummyService");
-      ps.addParameter("service_type", typeName);
+      ps.addParameter("@service_type", typeName);
       int value = 1;
       ps.addParameter("value", value);
       pss.push_back(ps);
