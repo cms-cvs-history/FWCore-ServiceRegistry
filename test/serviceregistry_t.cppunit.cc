@@ -26,7 +26,7 @@ class testServiceRegistry: public CppUnit::TestFixture
    CPPUNIT_TEST(loadTest);
    CPPUNIT_TEST(hierarchyTest);
    CPPUNIT_TEST(threadTest);
-   
+   CPPUNIT_TEST(externalServiceTest);
    
    CPPUNIT_TEST_SUITE_END();
 public:
@@ -36,6 +36,7 @@ public:
    void loadTest();
    void hierarchyTest();
    void threadTest();
+   void externalServiceTest();
 };
 
 ///registration of the test so that the runner can find it
@@ -62,6 +63,43 @@ testServiceRegistry::loadTest()
    CPPUNIT_ASSERT(dummy);
    CPPUNIT_ASSERT(dummy.isAvailable());
    CPPUNIT_ASSERT(dummy->value() == 2);
+}
+
+namespace {
+   struct DummyService { int value_; };
+}
+
+void
+testServiceRegistry::externalServiceTest()
+{
+   edm::AssertHandler ah;
+
+   {
+      std::auto_ptr<DummyService> dummyPtr(new DummyService);
+      dummyPtr->value_ = 2;
+      edm::ServiceToken token(edm::ServiceRegistry::createContaining(dummyPtr));
+      
+      edm::ServiceRegistry::Operate operate(token);
+      edm::Service<DummyService> dummy;
+      CPPUNIT_ASSERT(dummy);
+      CPPUNIT_ASSERT(dummy.isAvailable());
+      CPPUNIT_ASSERT(dummy->value_ == 2);
+   }
+
+   {
+      using edm::serviceregistry::ServiceWrapper;
+      std::auto_ptr<DummyService> dummyPtr(new DummyService);
+      boost::shared_ptr<ServiceWrapper<DummyService> > wrapper(new ServiceWrapper<DummyService>(dummyPtr));
+      edm::ServiceToken token(edm::ServiceRegistry::createContaining(wrapper));
+
+      wrapper->get().value_ = 2;
+
+      edm::ServiceRegistry::Operate operate(token);
+      edm::Service<DummyService> dummy;
+      CPPUNIT_ASSERT(dummy);
+      CPPUNIT_ASSERT(dummy.isAvailable());
+      CPPUNIT_ASSERT(dummy->value_ == 2);
+   }
 }
 
 void
