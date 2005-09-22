@@ -78,12 +78,34 @@ testServiceRegistry::externalServiceTest()
       std::auto_ptr<DummyService> dummyPtr(new DummyService);
       dummyPtr->value_ = 2;
       edm::ServiceToken token(edm::ServiceRegistry::createContaining(dummyPtr));
+      {         
+         edm::ServiceRegistry::Operate operate(token);
+         edm::Service<DummyService> dummy;
+         CPPUNIT_ASSERT(dummy);
+         CPPUNIT_ASSERT(dummy.isAvailable());
+         CPPUNIT_ASSERT(dummy->value_ == 2);
+      }
+      {
+         std::vector<edm::ParameterSet> pss;
+         
+         edm::ParameterSet ps;
+         std::string typeName("DummyService");
+         ps.addParameter("@service_type", typeName);
+         int value = 2;
+         ps.addParameter("value", value);
+         pss.push_back(ps);
       
-      edm::ServiceRegistry::Operate operate(token);
-      edm::Service<DummyService> dummy;
-      CPPUNIT_ASSERT(dummy);
-      CPPUNIT_ASSERT(dummy.isAvailable());
-      CPPUNIT_ASSERT(dummy->value_ == 2);
+         edm::ServiceToken token(edm::ServiceRegistry::createSet(pss));
+         edm::ServiceToken token2(edm::ServiceRegistry::createContaining(dummyPtr,
+                                                                         token,
+                                                                         edm::serviceregistry::kOverlapIsError));
+         
+         edm::ServiceRegistry::Operate operate(token2);
+         edm::Service<testserviceregistry::DummyService> dummy;
+         CPPUNIT_ASSERT(dummy);
+         CPPUNIT_ASSERT(dummy.isAvailable());
+         CPPUNIT_ASSERT(dummy->value() == 2);
+      }
    }
 
    {
@@ -94,11 +116,35 @@ testServiceRegistry::externalServiceTest()
 
       wrapper->get().value_ = 2;
 
-      edm::ServiceRegistry::Operate operate(token);
-      edm::Service<DummyService> dummy;
-      CPPUNIT_ASSERT(dummy);
-      CPPUNIT_ASSERT(dummy.isAvailable());
-      CPPUNIT_ASSERT(dummy->value_ == 2);
+      {
+         edm::ServiceRegistry::Operate operate(token);
+         edm::Service<DummyService> dummy;
+         CPPUNIT_ASSERT(dummy);
+         CPPUNIT_ASSERT(dummy.isAvailable());
+         CPPUNIT_ASSERT(dummy->value_ == 2);
+      }
+      {
+         std::vector<edm::ParameterSet> pss;
+         
+         edm::ParameterSet ps;
+         std::string typeName("DummyService");
+         ps.addParameter("@service_type", typeName);
+         int value = 2;
+         ps.addParameter("value", value);
+         pss.push_back(ps);
+         
+         edm::ServiceToken token(edm::ServiceRegistry::createSet(pss));
+         edm::ServiceToken token2(edm::ServiceRegistry::createContaining(dummyPtr,
+                                                                         token,
+                                                                         edm::serviceregistry::kOverlapIsError));
+         
+         edm::ServiceRegistry::Operate operate(token2);
+         edm::Service<testserviceregistry::DummyService> dummy;
+         CPPUNIT_ASSERT(dummy);
+         CPPUNIT_ASSERT(dummy.isAvailable());
+         CPPUNIT_ASSERT(dummy->value() == 2);
+      }
+      
    }
 }
 
