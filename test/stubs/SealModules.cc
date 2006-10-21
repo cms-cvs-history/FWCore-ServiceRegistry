@@ -13,6 +13,6 @@
 using namespace testserviceregistry;
 using namespace edm::serviceregistry;
 DEFINE_SEAL_MODULE();
-DEFINE_ANOTHER_FWK_SERVICE_MAKER(DependsOnDummyService,NoArgsMaker<DependsOnDummyService>)
-DEFINE_ANOTHER_FWK_SERVICE(DummyService)
+DEFINE_ANOTHER_FWK_SERVICE_MAKER(DependsOnDummyService,NoArgsMaker<DependsOnDummyService>);
+DEFINE_ANOTHER_FWK_SERVICE(DummyService);
 
