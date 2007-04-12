@@ -14,9 +14,9 @@
 using namespace testserviceregistry;
 using namespace edm::serviceregistry;
 DEFINE_FWK_SERVICE_MAKER(DependsOnDummyService,NoArgsMaker<DependsOnDummyService>);
-DEFINE_ANOTHER_FWK_SERVICE(DummyService);
-DEFINE_ANOTHER_FWK_SERVICE(DummyServiceE0);
-DEFINE_ANOTHER_FWK_SERVICE(DummyServiceA1);
-DEFINE_ANOTHER_FWK_SERVICE(DummyServiceD2);
-DEFINE_ANOTHER_FWK_SERVICE(DummyServiceB3);
-DEFINE_ANOTHER_FWK_SERVICE(DummyServiceC4);
+DEFINE_FWK_SERVICE(DummyService);
+DEFINE_FWK_SERVICE(DummyServiceE0);
+DEFINE_FWK_SERVICE(DummyServiceA1);
+DEFINE_FWK_SERVICE(DummyServiceD2);
+DEFINE_FWK_SERVICE(DummyServiceB3);
+DEFINE_FWK_SERVICE(DummyServiceC4);
