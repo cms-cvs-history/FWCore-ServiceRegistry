@@ -8,7 +8,7 @@
 <library file=stubs/DummyService.cc,stubs/DummyServiceE0.cc,stubs/DependsOnDummyService.cc name=FWCoreServiceRegistryTestDummyService >
 </library>
 
-<library file=stubs/SealModules.cc name=FWCoreServiceRegistryTestDummyServicePlugin >
+<library file=stubs/Modules.cc name=FWCoreServiceRegistryTestDummyServicePlugin >
   <lib name=FWCoreServiceRegistryTestDummyService>
   <flags EDM_PLUGIN=1 >
 </library>

@@ -1,5 +1,5 @@
 /*
- *  SealModules.cc
+ *  Modules.cc
  *  CMSSW
  *
  *  Created by Chris Jones on 9/7/05.
