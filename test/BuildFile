@@ -17,12 +17,10 @@
   <lib name=FWCoreServiceRegistryTestDummyService>
   <use name=FWCore/PluginManager>   
   <use name=FWCore/Utilities>   
-  <use name=boost> 
 </bin>
 
 <bin name=servicesmanager_order file=servicesmanager_order.cpp>
   <lib name=FWCoreServiceRegistryTestDummyService>
   <use name=FWCore/PluginManager>   
   <use name=FWCore/Utilities>   
-  <use name=boost> 
 </bin>
